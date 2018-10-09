@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <style>
+        select {
+            display: none;
+        }
+
+        .select {
+            display: inline;
+        }
+
+        .non-select {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <label>
+        <input id="school" name="status" type="radio"> School
+    </label>
+    <label>
+        <input id="company" name="status" type="radio"> Company
+    </label>
+
+    <select id="school-select">
+        <option>北京邮电大学</option>
+        <option>黑龙江大学</option>
+        <option>华中科技大学</option>
+    </select>
+
+    <select id="company-select">
+        <option>百度</option>
+        <option>爱奇艺</option>
+    </select>
+    <script>
+        var input1 = document.getElementById("school");
+        var input2 = document.getElementById("company");
+        input1.onclick = function () {
+            document.getElementById("school-select").className = "select";
+            document.getElementById("company-select").className = "non-select";
+        }
+        input2.onclick = function () {
+            document.getElementById("company-select").className = "select";
+            document.getElementById("school-select").className = "non-select";
+        }
+    </script>
+</body>
+
+</html>
