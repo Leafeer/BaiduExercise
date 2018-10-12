@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <title>IFE ECMAScript</title>
 </head>
-<body>        
+
+<body>
     <input id="first-number" type="number" value="0" placeholder="第一个数字">
     <input id="second-number" type="number" value="0" placeholder="第二个数字">
     <button id="add-btn">加</button>
@@ -13,22 +15,32 @@
     <button id="divide-btn">除</button>
     <p id="result">运算结果</p>
     <script>
-        document.getElementById('add-btn').onclick=function(){
-            var result=parseFloat(document.getElementById('first-number').value)+parseFloat(document.getElementById('second-number').value);
+        var numA = document.getElementById("first-number").value;
+        var numB = document.getElementById("second-number").value;
+        
+
+        if (numA && typeof (numA) == "NaN" || numA && typeof (numB) == "NaN") {
+            console.log("不能为空");
+        }
+        
+
+        document.getElementById('add-btn').onclick = function () {
+            var result = parseFloat(document.getElementById('first-number').value) + parseFloat(document.getElementById('second-number').value);
             document.getElementById('result').innerHTML = result;
         }
-        document.getElementById('minus-btn').onclick=function(){
-            var result=parseFloat(document.getElementById('first-number').value)-parseFloat(document.getElementById('second-number').value);
+        document.getElementById('minus-btn').onclick = function () {
+            var result = parseFloat(document.getElementById('first-number').value) - parseFloat(document.getElementById('second-number').value);
             document.getElementById('result').innerHTML = result;
         }
-        document.getElementById('times-btn').onclick=function(){
-            var result=parseFloat(document.getElementById('first-number').value)*parseFloat(document.getElementById('second-number').value);
+        document.getElementById('times-btn').onclick = function () {
+            var result = parseFloat(document.getElementById('first-number').value) * parseFloat(document.getElementById('second-number').value);
             document.getElementById('result').innerHTML = result;
         }
-        document.getElementById('divide-btn').onclick=function(){
-            var result=parseFloat(document.getElementById('first-number').value)/parseFloat(document.getElementById('second-number').value);
+        document.getElementById('divide-btn').onclick = function () {
+            var result = parseFloat(document.getElementById('first-number').value) / parseFloat(document.getElementById('second-number').value);
             document.getElementById('result').innerHTML = result;
         }
     </script>
 </body>
+
 </html>

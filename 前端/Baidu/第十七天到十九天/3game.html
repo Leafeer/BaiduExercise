@@ -23,22 +23,34 @@
         }
         function calfun() {
             getn();
-            if (fn > sn) {
-                console.log("第一个数应小于第二个数");
-                return;
-            }
             result = ""
-            for (i = fn; i <= sn; i++) {
-                if (i % 3 == 0) {
-                    result = result + ",PA<br>";
+            if (fn < sn) {
+
+                for (i = fn; i <= sn; i++) {
+                    if (i % 3 == 0) {
+                        result = result + ",PA<br>";
+                    }
+                    else {
+                        result = result + "," + i.toString();
+                    }
                 }
-                else {
-                    result = result + "," + i.toString();
-                }
+                result = result.slice(1);
+                putn();
             }
-            result = result.slice(1);
-            putn();
+            else {
+                for (i = sn; i <= fn; i++) {
+                    if (i % 3 == 0) {
+                        result = result + ",PA<br>";
+                    }
+                    else {
+                        result = result + "," + i.toString();
+                    }
+                }
+                result = result.slice(1);
+                putn();
+            }
         }
+
         function putn() {
 
             document.getElementById("result").innerHTML = '运算结果:' + result;
