@@ -23,35 +23,113 @@
     </div>
     <div>
         <button onclick="lengthString()">获取当前选中输入的内容长度</button>
-        <button>当前选中输入中的第3个字符</button>
-        <button>把两个输入框的文字连接在一起输出（concat）</button>
-        <button>输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
-        <button>输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
-        <button>使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
-        <button>当前选中输入框的行数</button>
-        <button>使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
-        <button>把所选输入框中的内容全部转为大写</button>
-        <button>把所选输入框中的内容全部转为小写</button>
-        <button>把所选输入框中内容的半角空格全部去除</button>
-        <button>把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
+        <button onclick="choiceString()">当前选中输入中的第3个字符</button>
+        <button onclick="concatString()">把两个输入框的文字连接在一起输出（concat）</button>
+        <button onclick="indexofString()">输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
+        <button onclick="lastindexofString()">输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
+        <button onclick="sliceString()">使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
+        <button onclick="splitString()">当前选中输入框的行数</button>
+        <button onclick="substrString()">使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
+        <button onclick="upString()">把所选输入框中的内容全部转为大写</button>
+        <button onclick="lowString()">把所选输入框中的内容全部转为小写</button>
+        <button onclick="kongString()">把所选输入框中内容的半角空格全部去除</button>
+        <button onclick="changeString()">把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
     </div>
     <p id="result"></p>
     <script>
+        var a = document.getElementById('radio-a');
+        var b = document.getElementById('radio-b');
+        var ta = document.getElementById('str-a');
+        var tb = document.getElementById('str-b');
+        var p = document.getElementById('result');
+        var na = document.getElementById('num-a');
+        var nb = document.getElementById('num-b');
         function lengthString() {
-            var a = document.getElementById('radio-a');
-            var b = document.getElementById('radio-b');
-            var ta = document.getElementById('str-a');
-            var tb = document.getElementById('str-b');
-            var p = document.getElementById('result');
+
             if (a.checked) {
                 p.innerHTML = ta.value.length;
             }
             else if (b.checked) {
                 p.innerHTML = tb.value.length;
             }
+
+        }
+        function choiceString() {
+
+            if (a.checked) {
+                p.innerHTML = ta.value[2];
+            }
+            else if (b.checked) {
+                p.innerHTML = tb.value[2];
+            }
             console.log(p.innerHTML)
         }
+        function concatString() {
+            p.innerHTML = ta.value.concat(tb.value);
+        }
+        function indexofString() {
+            p.innerHTML = ta.value.indexOf(tb.value);
+        }
+        function lastindexofString() {
+            p.innerHTML = ta.value.lastindexOF(tb.value);
+        }
 
+        function sliceString() {
+            if (a.checked) {
+                p.innerHTML = ta.value.slice(na.value, nb.value);
+            }
+            else if (b.checked) {
+                p.innerHTML = tb.value.slice(na.value, nb.value);
+            }
+        }
+        function splitString() {
+            if (a.checked) {
+                p.innerHTML = ta.value.split('\n').length;
+            }
+            else if (b.checked) {
+                p.innerHTML = tb.value.split('\n').length;
+            }
+
+        }
+        function substrString() {
+            if (a.checked) {
+                p.innerHTML = ta.value.substr(na.value, nb.value);
+            }
+            else if (b.checked) {
+                p.innerHTML = tb.value.substr(na.value, nb.value);
+            }
+        }
+        function upString() {
+            if (a.checked) {
+                p.innerHTML = ta.value.toUpperCase();
+            }
+            else if (b.checked) {
+                p.innerHTML = tb.value.toUpperCase();
+            }
+        }
+        function lowString() {
+            if (a.checked) {
+                p.innerHTML = ta.value.toLowerCase();
+            }
+            else if (b.checked) {
+                p.innerHTML = tb.value.toLowerCase();
+            }
+        }
+        function kongString() {
+            if (a.checked) {
+                p.innerHTML = ta.value.split(' ');
+            }
+            else if (b.checked) {
+                p.innerHTML = tb.value.split(' ');
+            }
+        }
+        function changeString(){
+            var changeStr ='';
+            changeStr = ta.value;
+            ta.value = tb.value;
+            tb.value = changeStr;
+        }
+        console.log(p.innerHTML)
     </script>
 </body>
 
