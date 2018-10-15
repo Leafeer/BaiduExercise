@@ -27,7 +27,7 @@
             if (fn < sn) {
 
                 for (i = fn; i <= sn; i++) {
-                    if (i % 3 == 0) {
+                    if (i % 3 == 0 || (i / 10) == 3 || (i % 10) == 3) {
                         result = result + ",PA<br>";
                     }
                     else {
@@ -39,7 +39,7 @@
             }
             else {
                 for (i = sn; i <= fn; i++) {
-                    if (i % 3 == 0) {
+                    if (i % 3 == 0 || (i / 10) == 3 || (i % 10) == 3) {
                         result = result + ",PA<br>";
                     }
                     else {
