@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-
 <body>
     <p>
 
@@ -17,13 +15,13 @@
         function getWeek() {
             var myDate = new Date();
             var weekday = {
-                "0": "星期日",
-                "1": "星期一",
-                "2": "星期二",
-                "3": "星期三",
-                "4": "星期四",
-                "5": "星期五",
-                "6": "星期六"
+                "0": "Sunday ",
+                "1": "Monday",
+                "2": "Tuesday ",
+                "3": "Wednesday ",
+                "4": "Thursday ",
+                "5": "Friday ",
+                "6": "Saturday "
             };
             return weekday[myDate.getDay()];
         }
@@ -42,9 +40,15 @@
                 hours = myDate.getHours(),
                 minutes = myDate.getMinutes(),
                 seconds = myDate.getSeconds();
-            var date = year + "年" +
-                appendZero(month + 1) + "月" +
-                appendZero(date) + "日" + "&nbsp;" +
+                if(hours>= 0 && hours <12){
+                    seconds =seconds + " AM"
+                }
+                if(hours>= 12 && hours <24){
+                    seconds =seconds + " PM"
+                }
+            var date = year + "-" +
+                appendZero(month + 1) + "-" +
+                appendZero(date)  + "&nbsp;" +
                 getWeek() + "&nbsp;" +
                 appendZero(hours) + "&#58;" +
                 appendZero(minutes) + "&#58;" +
@@ -58,5 +62,4 @@
         console.log(date)
     </script>
 </body>
-
 </html>
