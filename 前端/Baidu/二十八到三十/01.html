@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        *{
+        margin: 0,10,0,0;
+        padding: 0;
+    }
+    input{
+        width: 200px;
+        height: 30px;
+        border: 1px solid #c7c7c7;
+    }
+    ul li {
+        list-style-type: none;
+			border: 1px solid #CCCCCC;
+			color: #A8A8A8;
+			width: 200px;
+			height: 28px;
+    }
+    ul li:hover,
+    .active{
+        color:black;
+        background-color: rgb(65, 201, 255)
+    }
+    .first{
+        background-color: aqua;
+    }
+    </style>
+    <input type="text/JavaScript" id="emailInput">
+    <ul id="email-sug-wrapper"></ul>
+    <script>
+        document.getElementById('emailInput').addEventListener('input', inputEvent)
+
+        var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'],
+            contentList = [],
+            currentOption = 0;
+
+        console.log(contentList);
+        //监听用户输入
+        function inputEvent() {
+            var value = inputValue();
+            contentList = promptBox(value);
+            addList(contentList);
+            showPromt(value);
+        }
+
+        // 获取用户输入，生成提示框中的提示内容，将提示内容添加到email - sug - wrapper中
+        function inputValue() {
+            var value = document.getElementById('emailInput').value.trim();
+            value = value.replace(/&/g, "&amp;");
+            value = value.replace(/</g, "&lt;");
+            value = value.replace(/>/g, "&gt;");
+            value = value.replace(/ /g, "&nbsp;");
+            value = value.replace(/"/g, '&quot;');
+            return value;
+        }
+
+
+        // function 生成提示框中的提示内容() {
+        function promptBox(value) {
+            var tempPostfixList = postfixList.slice(),
+                index = value.indexOf('@'),
+                postfix = '',
+                newPostfixList = [];
+            if (index !== -1) {
+                var tempValue = value;
+                value = tempValue.slice(0, index);
+                postfix = tempValue.slice(index + 1);
+                for (var i = 0; i < tempPostfixList.length; i++) {
+                    if (tempPostfixList[i].slice(0, postfix.length) === postfix && postfix) {
+                        newPostfixList.push(tempPostfixList[i]);
+                    }
+                }
+                if (newPostfixList.length === 0) {
+                    newPostfixList = tempPostfixList;
+                }
+            }
+            else {
+                newPostfixList = tempPostfixList;
+            }
+            for (var j = 0; j < newPostfixList.length; j++) {
+                newPostfixList[j] = value + '@' + newPostfixList[j];
+            }
+            return newPostfixList;
+        }
+
+        /* function 将提示内容添加到email-sug - wrapper中() {
+             获取生成提示框中的提示内容
+             将内容添加到email - sug - wrapper中
+         }*/
+
+        function addList(valueList) {
+            var li = '';
+            for (option of valueList) {
+                li += `<li>${option}</li>`;
+            }
+            document.getElementById('email-sug-wrapper').innerHTML = li;
+
+        }
+
+        /*鼠标点击监听*/
+        document.getElementById('email-sug-wrapper').addEventListener('click', clickEvent);
+        function clickEvent(e) {
+            var value = e.target.innerText;
+            value = value.replace(/&amp;/g,"&");
+            value = value.replace(/&lt;/g,"<");
+            value = value.replace(/&gt;/g,">");
+            value = value.replace(/&nbsp;/g," ");
+            value = value.replace(/&quot/g,"'");
+            document.getElementById('emailInput').value = value;
+            document.getElementById('email-sug-wrapper').style = 'display: none;';
+            focusEvent();
+        }
+        /*键盘输入监听*/
+
+        function keyStyle() {
+            var liStyle = document.querySelectorAll('li');
+            for (item of liStyle) {
+                item.style.backgroundColor = 'white';
+            }
+            liStyle[currentOption].style.backgroundColor = 'rgb(65, 201, 255)';
+        }
+
+        document.getElementById('emailInput').addEventListener('keydown', keyEvent)
+        function keyEvent(e) {
+            var index = postfixList.length;
+            if (e.keyCode === 40) {//下
+                if (currentOption === index - 1) {
+                    currentOption = 0;
+                } else {
+                    currentOption += 1;
+                }
+                keyStyle();
+                e.preventDefault();
+            } else if (e.keyCode === 38) {//上
+                if (currentOption === 0) {
+                    currentOption = index - 1;
+                } else {
+                    currentOption -= 1;
+                }
+                keyStyle();
+                e.preventDefault();
+            } else if (e.keyCode === 13) {//enter
+                document.getElementById('emailInput').value = contentList[currentOption];
+                document.getElementById('email-sug-wrapper').style = 'display: none;';
+                focusEvent();
+            } else if (e.keyCode === 27) {//esc
+                document.getElementById('emailInput').select();
+            }
+        
+        }
+
+
+        function showPromt(value) {
+            if (value) {
+                document.getElementById('email-sug-wrapper').style = 'display:block;';
+            }
+            else {
+                document.getElementById('email-sug-wrapper').style = 'display:none;';
+            }
+        }
+
+
+        /*inputDom的输入监听 = function () {
+            /*获取用户输入，生成提示框中的提示内容，将提示内容添加到email - sug - wrapper中
+            //控制email - sug - wrapper的显示 / 隐藏状态
+        }
+
+        function 获取用户输入() {
+            //拿到input输入框的输入内容trim后返回
+        }
+ 
+        function 生成提示框中的提示内容() {
+           //获取用户输入
+            遍历postfixList {
+                把用户输入和每一个postfix进行结合成为每一个Li
+            }
+            返回生成的提示内容
+            
+        }*/
+        /*焦点*/
+        function focusEvent() {
+            document.getElementById('emailInput').focus();
+        }
+        //mouseover style
+        document.getElementById('email-sug-wrapper').addEventListener('mouseover', mouseoverStyle);
+        function mouseoverStyle(e) {
+        	var li = document.querySelectorAll('li');
+        	 for (item of li) {
+                item.style.backgroundColor = 'white';
+            }
+            
+            e.target.style.backgroundColor = 'skyblue';
+        }
+
+
+
+    </script>
+</body>
+
+</html>
