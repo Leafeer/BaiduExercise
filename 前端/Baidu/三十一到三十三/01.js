@@ -1,5 +1,5 @@
 var tableWrapper = document.getElementById('table-wrapper');
-var judging = 0;  
+var judging = 0;
 function getSelected() {
     mappingData = [];
     selectRegion = [];                    // 地区类
@@ -18,65 +18,65 @@ function getSelected() {
         }
     }
     // 地区多选，商品没有时
-    if(selectRegion.length >= 1 && selectProduct.length == 0){
+    if (selectRegion.length >= 1 && selectProduct.length == 0) {
         judging = 0;
-        for(i in sourceData){
-            for(j in selectRegion){
-                if(sourceData[i].region == selectRegion[j]){
+        for (i in sourceData) {
+            for (j in selectRegion) {
+                if (sourceData[i].region == selectRegion[j]) {
                     mappingData.unshift(sourceData[i]);
                 }
             }
         }
     }
     // 商品多选，地区没有时
-    if(selectProduct.length >= 1 && selectRegion.length == 0){
+    if (selectProduct.length >= 1 && selectRegion.length == 0) {
         judging = 0;
-        for(i in sourceData){
-            for(j in selectProduct){
-                if(sourceData[i].product == selectProduct[j]){
+        for (i in sourceData) {
+            for (j in selectProduct) {
+                if (sourceData[i].product == selectProduct[j]) {
                     mappingData.unshift(sourceData[i]);
                 }
             }
         }
     }
     // 地区和商品都只有一个 
-    if(selectProduct.length == 1 && selectRegion.length == 1){
+    if (selectProduct.length == 1 && selectRegion.length == 1) {
         judging = 0;
-        for(i in sourceData){
-            if(sourceData[i].region == selectRegion[0] && sourceData[i].product == selectProduct[0]){
+        for (i in sourceData) {
+            if (sourceData[i].region == selectRegion[0] && sourceData[i].product == selectProduct[0]) {
                 mappingData.unshift(sourceData[i]);
             }
         }
     }
     // 商品选择了一个，地区选择了多个的时候 :商品在前，地区在后
-    if(selectProduct.length == 1 && selectRegion.length > 1){
+    if (selectProduct.length == 1 && selectRegion.length > 1) {
         judging = 1;
-        for(i in sourceData){
-            for(j in selectRegion){
-                if(sourceData[i].region == selectRegion[j] && sourceData[i].product == selectProduct[0]){
+        for (i in sourceData) {
+            for (j in selectRegion) {
+                if (sourceData[i].region == selectRegion[j] && sourceData[i].product == selectProduct[0]) {
                     mappingData.unshift(sourceData[i]);
                 }
             }
         }
     }
     // 当地区选择了一个，商品选择了多个的时候 ： 商品在后，地区在前
-    if(selectProduct.length > 1 && selectRegion.length == 1){
+    if (selectProduct.length > 1 && selectRegion.length == 1) {
         judging = 2;
-        for(i in sourceData){
-            for(j in selectProduct){
-                if(sourceData[i].product == selectProduct[j] && sourceData[i].region == selectRegion[0]){
+        for (i in sourceData) {
+            for (j in selectProduct) {
+                if (sourceData[i].product == selectProduct[j] && sourceData[i].region == selectRegion[0]) {
                     mappingData.unshift(sourceData[i]);
                 }
             }
         }
     }
     // 商品和地区都选择了多于一个的情况下:商品作为第一列，地区作为第二列
-    if(selectProduct.length > 1 && selectRegion.length > 1){
+    if (selectProduct.length > 1 && selectRegion.length > 1) {
         judging = 1;
-        for(i in sourceData){
-            for(j in selectProduct){
-                for(k in selectRegion){
-                    if(sourceData[i].product == selectProduct[j] && sourceData[i].region == selectRegion[k]){
+        for (i in sourceData) {
+            for (j in selectProduct) {
+                for (k in selectRegion) {
+                    if (sourceData[i].product == selectProduct[j] && sourceData[i].region == selectRegion[k]) {
                         mappingData.unshift(sourceData[i]);
                     }
                 }
@@ -171,3 +171,4 @@ function loopAppend(bodyTr, mappingData) {
     }
     return bodyTr;
 }
+
